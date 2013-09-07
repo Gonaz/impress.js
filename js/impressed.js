@@ -53,51 +53,60 @@
             event.preventDefault();
         }
 
-        if (action === Action.next) {
-            action = Action.invalid;
-            var currentStep = document.getElementsByClassName("present")[0];
-            var highlights = getHighlights(currentStep);
-            currentHighlight++;
-
-            var highlightedSomething = false;
-            for (var i = highlights.length - 1; i >= 0; i--) {
-                if (highlights[i].id === currentStep.id + "-" + currentHighlight) {
-                    highlights[i].classList.add("highlighted");
-                    highlightedSomething = true;
-                } else {
-                    highlights[i].classList.remove("highlighted");
-                }
-            };
-
-            if (!highlightedSomething) {
-                currentHighlight = 0;
-                impress().next();
+        if (action === Action.next || action === Action.previous) {
+            if (previousStep !== null) {
+                impress().goto(previousStep);
+                previousStep = null;
+                action = Action.invalid;
+                return;
             }
-        } else if (action === Action.previous) {
-            action = Action.invalid;
+
             var currentStep = document.getElementsByClassName("present")[0];
             var highlights = getHighlights(currentStep);
-            --currentHighlight;
 
-            var highlightedSomething = false;
-            for (var i = highlights.length - 1; i >= 0; i--) {
-                if (highlights[i].id === currentStep.id + "-" + currentHighlight) {
-                    highlights[i].classList.add("highlighted");
-                    highlightedSomething = true;
-                } else {
-                    highlights[i].classList.remove("highlighted");
+            if (action === Action.next) {
+                ++currentHighlight;
+
+                var highlightedSomething = false;
+                for (var i = highlights.length - 1; i >= 0; i--) {
+                    if (highlights[i].id === currentStep.id + "-" + currentHighlight) {
+                        highlights[i].classList.add("highlighted");
+                        highlightedSomething = true;
+                    } else {
+                        highlights[i].classList.remove("highlighted");
+                    }
+                };
+
+                if (!highlightedSomething) {
+                    currentHighlight = 0;
+                    impress().next();
                 }
-            };
+            } else if (action === Action.previous) {
+                --currentHighlight;
 
-            if (!highlightedSomething) {
-                currentHighlight = 0;
-                impress().prev();
+                var highlightedSomething = false;
+                for (var i = highlights.length - 1; i >= 0; i--) {
+                    if (highlights[i].id === currentStep.id + "-" + currentHighlight) {
+                        highlights[i].classList.add("highlighted");
+                        highlightedSomething = true;
+                    } else {
+                        highlights[i].classList.remove("highlighted");
+                    }
+                };
+
+                if (!highlightedSomething) {
+                    currentHighlight = 0;
+                    impress().prev();
+                }
             }
         } else if (action === Action.overview) {
+            previousStep = document.getElementsByClassName("present")[0].id;
             impress().goto("overview");
         }
+        action = Action.invalid;
     }, false);
 
+    var previousStep = null;
     var currentHighlight = 0;
     var action = Action.invalid;
 })(document, window);
