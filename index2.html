@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>impressed.js - An extension to impress.js</title>
+    
+    <meta name="author" content="Jonas Vanthornhout" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    <link href="css/impressed.css" rel="stylesheet" />
+</head>
+
+
+<body class="impress-not-supported">
+
+<div id="impress">
+    <div id="highlights" class="step slide" data-x="0" data-y="0" data-scale="2">
+        <h1>Highlights</h1>
+        This slide shows <span id="highlights-1">a</span> <span id="highlights-2">couple</span> of <span id="highlights-3">highlights</span>.
+    </div>
+
+    <div id="Summary" class="step slide" data-x="2000" data-y="0" data-scale="2">
+        <h1>Extensions</h1>
+        <ul>
+            <li> Highlights </li>
+        </ul>
+    </div>
+
+    <div id="overview" class="step" data-x="1000" data-y="0" data-scale="6">
+    </div>
+</div>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+<script src="js/impressed.js"></script>
+
+</body>
+</html>
+

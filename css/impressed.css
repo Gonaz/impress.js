@@ -1,0 +1,22 @@
+/* Styles needed for impressed.js */
+
+.highlighted {
+	color: red;
+}
+
+
+/* Extra styles (not needed for impressed.js) */
+
+h1 {
+	border-bottom: 2px solid black;
+	margin-bottom: 5%;
+}
+
+li {
+    list-style-position: inside;
+    line-height: 5%;
+}
+
+ul>li {
+    list-style-type: square;
+}
