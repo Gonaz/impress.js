@@ -24,15 +24,18 @@
 
     // Prevent default keydown action when one of supported key is pressed.
     document.addEventListener("keydown", function ( event ) {
-        if ( event.keyCode === 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
+        if ( event.keyCode === 9 || event.keyCode === "27" || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
             event.preventDefault();
         }
     }, false);
     
     // Trigger impress action (next or prev) on keyup.
     document.addEventListener("keyup", function ( event ) {
-        if ( event.keyCode === 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
+        if ( event.keyCode === 9 || event.keyCode === 27 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
             switch( event.keyCode ) {
+                case 27: //esc
+                    action = Action.overview;
+                    break;
                 case 33: // pg up
                 case 37: // left
                 case 38: // up
@@ -90,7 +93,9 @@
                 currentHighlight = 0;
                 impress().prev();
             }
-        } 
+        } else if (action === Action.overview) {
+            impress().goto("overview");
+        }
     }, false);
 
     var currentHighlight = 0;
